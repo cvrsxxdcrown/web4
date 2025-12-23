@@ -1,16 +1,26 @@
 <?php
-require_once __DIR__ . '/settings.php';
+class Settings {
+    private static ?Settings $instance = null;
+    private array $data = [];
 
-use Singleton\Settings;
+    private function __construct() {}
 
-$settings = Settings::get();
+    public static function getInstance(): Settings {
+        if (!self::$instance) {
+            self::$instance = new Settings();
+        }
+        return self::$instance;
+    }
 
-$settings->number = 123;
-$settings->text = "Hello";
-$settings->flag = true;
+    public function get(string $key) {
+        return $this->data[$key] ?? null;
+    }
 
-echo "<pre>";
-echo "number: {$settings->number}\n";
-echo "text: {$settings->text}\n";
-echo "flag: " . ($settings->flag ? 'true' : 'false');
-echo "</pre>";
+    public function set(string $key, $value): void {
+        $this->data[$key] = $value;
+    }
+}
+
+$s = Settings::getInstance();
+$s->set('site','Demo');
+echo $s->get('site');

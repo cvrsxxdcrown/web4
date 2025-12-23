@@ -1,18 +1,22 @@
-CREATE TABLE msgs (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT NOT NULL,
-    category INTEGER NOT NULL,
-    description TEXT NOT NULL,
-    source TEXT NOT NULL,
-    datetime INTEGER NOT NULL
-);
-
-CREATE TABLE category (
-    id INTEGER PRIMARY KEY,
-    name TEXT NOT NULL
-);
-
-INSERT INTO category (id, name) VALUES
-(1, 'Политика'),
-(2, 'Культура'),
-(3, 'Спорт');
+################### Таблица msgs ######################
+CREATE TABLE msgs(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	title TEXT,
+	category INTEGER,
+	description TEXT,
+	source TEXT,
+	datetime INTEGER
+)
+#######################################################
+################### Таблица category ######################
+CREATE TABLE category(
+	id INTEGER,
+	name TEXT
+)
+#######################################################
+################### Заполнение таблицы category ######################
+INSERT INTO category(id, name)
+SELECT 1 as id, 'Политика' as name
+UNION SELECT 2 as id, 'Культура' as name
+UNION SELECT 3 as id, 'Спорт' as name 
+######################################################################

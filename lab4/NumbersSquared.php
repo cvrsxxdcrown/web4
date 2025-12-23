@@ -1,12 +1,11 @@
 <?php
 
 class NumbersSquared implements Iterator {
+    private $start;
+    private $end;
+    private $current;
 
-    private int $start;
-    private int $end;
-    private int $current;
-
-    public function __construct(int $start, int $end) {
+    public function __construct($start, $end) {
         $this->start = $start;
         $this->end = $end;
     }
@@ -23,11 +22,18 @@ class NumbersSquared implements Iterator {
         $this->current++;
     }
 
-    public function key(): int {
+    public function key(): mixed {
         return $this->current;
     }
 
-    public function current(): int {
-        return $this->current ** 2;
+    public function current(): float|int {
+        return $this->current * $this->current;
     }
+}
+
+
+$obj = new NumbersSquared(3, 7);
+
+foreach ($obj as $num => $square) {
+    echo "Квадрат числа $num = $square\n";
 }

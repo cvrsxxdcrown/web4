@@ -1,16 +1,16 @@
 <?php
-$id = (int)$_GET["del"];
 
-if ($id <= 0) {
-    header("Location: news.php");
-    exit;
+$id = $_GET['id'] ?? null;
+
+if (!$id || !is_numeric($id)) {
+    return;
 }
 
-$res = $news->deleteNews($id);
+$id = (int)$id;
 
-if ($res) {
-    header("Location: news.php");
+if ($news->deleteNews($id)) {
+    header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 } else {
-    $errMsg = "Произошла ошибка при удалении новости";
+    $errMsg = "Не удалось удалить новость.";
 }

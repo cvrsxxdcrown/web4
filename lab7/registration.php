@@ -31,12 +31,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   <form action="" method="post">
     <div>
-      <img src="noise-picture.php" alt="captcha">
+      <img src="noise-picture.php" alt="captcha"
+           onerror="this.style.display='none';
+                    document.getElementById('captchaError').style.display='block';">
     </div>
+
+    <div id="captchaError" style="display:none; color:red;">
+      Картинка заблокирована. Разблокируйте отображение изображений.
+    </div>
+
     <div>
       <label>Введите строку</label>
       <input type="text" name="answer" size="6">
     </div>
+
     <input type="submit" value="Подтвердить">
   </form>
 

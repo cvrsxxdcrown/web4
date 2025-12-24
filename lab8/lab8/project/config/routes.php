@@ -16,6 +16,6 @@ return [
     new Route('/user/:id/', 'user', 'show'),
     new Route('/user/:id/:key/', 'user', 'info'),
 
-    new Route('/product/:n/', 'product', 'show'),
+    new Route('/product/:id/', 'product', 'show'),
     new Route('/products/all/', 'product', 'all'),
 ];

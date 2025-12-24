@@ -1,44 +1,16 @@
 <?php
 
-class User {
-    public string $email;
-    public string $name;
+require_once 'patterns/mvc/controllers/router.php';
+require_once 'patterns/mvc/models/user.php';
+require_once 'patterns/mvc/models/users.php';
+require_once 'patterns/mvc/views/markdownview.php';
 
-    public function __construct($email,$name) {
-        $this->email = $email;
-        $this->name = $name;
-    }
-}
 
-class View {
-    private $model;
+use Mvc\Views\MarkdownView;
+use Mvc\Models\Users;
 
-    public function __construct($model) {
-        $this->model = $model;
-    }
+$usersObj = new Users();
+$users = $usersObj->collection;
 
-    public function render() {
-        echo '<pre>';
-        print_r($this->model);
-        echo '</pre>';
-    }
-}
-
-class Controller {
-    private $model;
-
-    public function __construct($model) {
-        $this->model = $model;
-    }
-
-    public function render() {
-        (new View($this->model))->render();
-    }
-}
-
-$users = [
-    new User('a@mail.com','Ivan'),
-    new User('b@mail.com','Petr')
-];
-
-(new Controller($users))->render();
+$view = new MarkdownView($users);
+echo nl2br($view->render());
